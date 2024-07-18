@@ -1,0 +1,38 @@
+{% extends "layouts/main.html" %}
+
+{% block title %}
+    <title>Погода{{" - " + location if  location}}</title>
+{% endblock %}
+
+{% block header %}
+    <h1>Погода{{" - " + location if  location}}</h1>
+{% endblock %}
+
+{% block main_content %}
+    {% if error %}
+        <div class="error">
+            <h2>Что-то пошло не так</h2>
+        </div>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Дата</th>
+                    <th>Температура</th>
+                    <th>Осадки</th>
+                    <th>Скорость ветра</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for i in range(weather_data['time']|length)%}
+                    <tr>
+                        <td>{{weather_data['time'][i]}}</td>
+                        <td>{{weather_data['temperature_2m_min'][i]}}°C - {{weather_data['temperature_2m_max'][i]}}°C</td>
+                        <td>{{weather_data['precipitation_sum'][i]}} мм</td>
+                        <td>{{weather_data['wind_speed_10m_max'][i]}} м/с</td>
+                    </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

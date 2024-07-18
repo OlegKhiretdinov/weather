@@ -1,0 +1,42 @@
+{% extends "layouts/main.html" %}
+
+{% block main_content %}
+    <form enctype="multipart/form-data" method="get">
+        <input placeholder="Поиск местоположения" value="{{search_str}}" type="text" name="location">
+        <button type="submit">Найти</button>
+    </form>
+    {% if locations is defined and locations|length == 0 %}
+        <div class="info">
+            <p><b>Не найдено</b></p>
+        </div>
+    {% elif locations is defined and locations|length > 0 %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Страна</th>
+                    <th>Город</th>
+                    <th>Регион</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for item in locations%}
+                    <tr>
+                        <td>{{item.country}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.admin1}} {{item.admin2}}</td>
+                        <td>
+                            <form method="post" action={{url_for('weather', location_id=item.id)}}>
+                                <input class="hidden" name="latitude" value={{item.latitude}}>
+                                <input class="hidden" name="longitude" value={{item.longitude}}>
+                                <input class="hidden" name="name" value={{item.name}}>
+                                <input class="hidden" name="id" value={{item.id}}>
+                                <button class="link_button" type="submit">Узнать погоду</button>
+                            </form>
+                        </td>
+                    </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}
