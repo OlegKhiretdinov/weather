@@ -25,4 +25,4 @@ def get_weather(latitude, longitude):
             'wind_speed_unit': 'ms'
         }
     )
-    return response.json()
+    return response.json(), response.status_code

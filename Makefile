@@ -3,3 +3,6 @@ dev:
 
 start:
 	poetry run gunicorn -w 5 -b 0.0.0.0:8000 weather:app
+
+lint:
+	poetry run flake8 weather

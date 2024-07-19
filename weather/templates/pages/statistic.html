@@ -1,0 +1,34 @@
+{% extends "layouts/main.html" %}
+
+{% block title %}
+    <title>Статистика просмотров</title>
+{% endblock %}
+
+{% block header %}
+    <h1>Статистика просмотров</h1>
+{% endblock %}
+
+{% block main_content %}
+    {% if error %}
+        <div class="error">
+            <h2>Что-то пошло не так</h2>
+        </div>
+    {% elif statistic|length %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Город</th>
+                    <th>Просмотры</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for item in statistic%}
+                    <tr>
+                        <td><a href="{{ url_for('weather', location_id=item[1]) }}">{{item[0]}}</a></td>
+                        <td>{{item[2]}}</td>
+                    </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

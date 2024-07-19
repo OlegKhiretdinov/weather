@@ -1,0 +1,34 @@
+{% extends "layouts/main.html" %}
+
+{% block title %}
+    <title>История просмотров</title>
+{% endblock %}
+
+{% block header %}
+    <h1>История просмотров</h1>
+{% endblock %}
+
+{% block main_content %}
+    {% if error %}
+        <div class="error">
+            <h2>Что-то пошло не так</h2>
+        </div>
+    {% elif history|length %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Город</th>
+                    <th>Дата</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in history %}
+                    <tr>
+                        <td>{{ item[0] }}</td>
+                        <td>{{ item[1] | formatdatetime}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

@@ -2,9 +2,17 @@
 
 {% block main_content %}
     <form enctype="multipart/form-data" method="get">
-        <input placeholder="Поиск местоположения" value="{{search_str}}" type="text" name="location">
+        <input placeholder="Поиск местоположения" value="{{search_str or ''}}" type="text" name="location">
         <button type="submit">Найти</button>
     </form>
+    {% if last_location %}
+        <div>
+            Прогноз погоды для города
+            <a href="{{ url_for('weather', location_id=last_location[0]) }}">
+                {{last_location[1]}}
+            </a>
+        </div>
+    {% endif %}
     {% if locations is defined and locations|length == 0 %}
         <div class="info">
             <p><b>Не найдено</b></p>
