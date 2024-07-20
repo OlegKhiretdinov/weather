@@ -19,6 +19,7 @@ app.secret_key = os.getenv('SECRET_KEY')
 def home_page():
     user_id, is_new_user = check_current_user_id()
     search_str = request.values.get('location')
+    last_location = None
 
     if not is_new_user and not search_str:
         # Смотрим последний город в истории пользователя
