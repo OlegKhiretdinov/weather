@@ -21,11 +21,10 @@ PostgerSQL >= 16
    source .venv/bin/activate
    ```
 4. Создать таблицы в базе данных 
-   1. Создать миграцию.
-      ```shell
-      alembic revision --autogenerate -m "initial"
-      ```
-   2. Применить миграцию
-       ```shell
-       alembic upgrade head
-       ```
+    ```shell
+    alembic upgrade head
+    ```
+5. выполнить команду
+   ```shell
+   make start
+   ```
